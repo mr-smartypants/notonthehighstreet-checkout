@@ -38,7 +38,7 @@ public class Application {
                     } else {
                         checkout.scan(item.get());
                         System.out.print("\u0007");
-                        System.out.printf("BE-E-E-EP%nAdded item: %s, £%.2f%n", item.get().getName(), item.get().getPrice());
+                        System.out.printf("Added item: %s, £%.2f%n", item.get().getName(), item.get().getPrice());
                     }
                     break;
                 case "total":
