@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import static me.olhovsky.notonthehighstreet.checkout.TestConstants.CARD_HOLDER_ITEM;
+import static me.olhovsky.notonthehighstreet.checkout.TestConstants.KIDS_TSHIRT_ITEM;
+import static me.olhovsky.notonthehighstreet.checkout.TestConstants.PERSONALISED_CUFFLINKS_ITEM;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CheckoutTest {
@@ -25,9 +28,9 @@ class CheckoutTest {
     @Test
     void total_eligibleForTotalAmountPromotion_promotionApplied() {
         //given
-        checkout.scan(new Item("001", "Travel Card Holder", BigDecimal.valueOf(9.25)));
-        checkout.scan(new Item("002", "Personalised cufflinks", BigDecimal.valueOf(45.00)));
-        checkout.scan(new Item("003", "Kids T-shirt", BigDecimal.valueOf(19.95)));
+        checkout.scan(CARD_HOLDER_ITEM);
+        checkout.scan(PERSONALISED_CUFFLINKS_ITEM);
+        checkout.scan(KIDS_TSHIRT_ITEM);
 
         //when
         Double result = checkout.total();
@@ -39,9 +42,9 @@ class CheckoutTest {
     @Test
     void total_eligibleForMultiPurchasePromotion_promotionApplied() {
         //given
-        checkout.scan(new Item("001", "Travel Card Holder", BigDecimal.valueOf(9.25)));
-        checkout.scan(new Item("003", "Kids T-shirt", BigDecimal.valueOf(19.95)));
-        checkout.scan(new Item("001", "Travel Card Holder", BigDecimal.valueOf(9.25)));
+        checkout.scan(CARD_HOLDER_ITEM);
+        checkout.scan(KIDS_TSHIRT_ITEM);
+        checkout.scan(CARD_HOLDER_ITEM);
 
         //when
         Double result = checkout.total();
@@ -53,10 +56,10 @@ class CheckoutTest {
     @Test
     void total_eligibleForBothPromotions_bothPromotionsAppliedInCorrectOrder() {
         //given
-        checkout.scan(new Item("001", "Travel Card Holder", BigDecimal.valueOf(9.25)));
-        checkout.scan(new Item("002", "Personalised cufflinks", BigDecimal.valueOf(45.00)));
-        checkout.scan(new Item("001", "Travel Card Holder", BigDecimal.valueOf(9.25)));
-        checkout.scan(new Item("003", "Kids T-shirt", BigDecimal.valueOf(19.95)));
+        checkout.scan(CARD_HOLDER_ITEM);
+        checkout.scan(PERSONALISED_CUFFLINKS_ITEM);
+        checkout.scan(CARD_HOLDER_ITEM);
+        checkout.scan(KIDS_TSHIRT_ITEM);
 
         //when
         Double result = checkout.total();
@@ -68,8 +71,8 @@ class CheckoutTest {
     @Test
     void total_notEligibleForAnyPromotion_totalValueReturned() {
         //given
-        checkout.scan(new Item("001", "Travel Card Holder", BigDecimal.valueOf(9.25)));
-        checkout.scan(new Item("003", "Kids T-shirt", BigDecimal.valueOf(19.95)));
+        checkout.scan(CARD_HOLDER_ITEM);
+        checkout.scan(KIDS_TSHIRT_ITEM);
 
         //when
         Double result = checkout.total();
