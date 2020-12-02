@@ -42,6 +42,9 @@ to a customer.
 * How to resolve conflicting promotions? For example if we have two multipurchase promotions for the same item but with
 different thresholds. Say we want to set yet even lower price if a customer buys 5 card holders.
 
+* Obviously the implementation is not thread-safe as it is. If concurrent use is a requirement then necessary synchronisations
+should be added. 
+
 #### Usage
 To run the application *Java 11* or higher is required.
 
