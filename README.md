@@ -29,6 +29,15 @@ promotions should be applied. It appears that one promotion should be applied st
  and total amount ones, are calculated. I decided to go with this approach, adding `getPriority()` method to `PromotionalRule`
   interface. Rules are being sorted in `Checkout` class according to value of this field before being applied.
 
+Among other decisions I'm using BigDecimal rather than double or int for monetary amounts as it avoids rounding errors
+that are unavoidable with doubles and gives me control over rounding modes. Could've used ints I suppose and have all values in pence 
+but I think this is more confusing and would make life of the people dealing with the amounts harder.
+
+I'm adding applied promotional values as special kind of items to a temp list that I pass to the next promotion to be applied.
+This allows me to have a uniform interface for all kinds of promotions, whether they are based on the value of previously 
+applied promotions or not. With minimal changes this can enable implementation of more sophisticated promotion logic
+which can base on the types and values of previously applied promotions. Also I think this can play nicely with how we
+display the list of items in checkout to the user - clearly displaying types and values of promotions applied.
 
 #### Potential improvements
 
